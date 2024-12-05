@@ -20,6 +20,6 @@ code {
 }
 
 .page-content.page-content-extended {
-  padding-left: 275px; /* Adjust padding to match your sidebar width */
+  padding-left: 275px;
   transition: padding 1000ms;
 }
