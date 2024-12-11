@@ -5,6 +5,8 @@ import * as IoIcons from "react-icons/io";
 import Home from "../pages/Home";
 import Todo from "../pages/Todo";
 import About from "../pages/About";
+import Register from "../pages/Register";
+
 
 export const Routes = [
     {
@@ -27,6 +29,13 @@ export const Routes = [
         icons: <AiIcons.AiOutlineInfoCircle  />,
         cName: "nav-text",
         component:  <About />,
+    },
+    {
+        title: "Register",
+        path: "/register",
+        icons: <AiIcons.AiOutlineInfoCircle  />,
+        cName: "nav-text",
+        component:  <Register />,
     }
 ];
 

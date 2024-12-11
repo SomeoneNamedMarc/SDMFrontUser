@@ -23,3 +23,41 @@ code {
   padding-left: 275px;
   transition: padding 1000ms;
 }
+.ul-no-styletype {
+  list-style-type: none;
+}
+
+.ul-no-styletype li{
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.home {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  /*align-items: center;*/
+}
+.chart-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 75%;
+  height: auto;
+  
+}
+.register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 10%;
+  padding-top: 5%;
+}
+.registration-fields {
+  padding-bottom: 2%;
+}
