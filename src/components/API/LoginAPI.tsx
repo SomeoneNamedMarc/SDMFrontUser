@@ -6,7 +6,7 @@ function Login(Username: string, Password: string ) {
         Password,
     };
 
-    Add correct link --> return fetch("https://localhost:7214/api/users", {
+    return fetch("https://localhost:7214/api/users/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

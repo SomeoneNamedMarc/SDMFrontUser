@@ -1,15 +1,18 @@
 import React, {useState} from 'react';
 import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
 import { Link, useLocation } from 'react-router-dom';
 import { IconContext } from "react-icons";
-import { Routes } from "./Routes";
+import { publicRoutes, protectedRoutes } from "./Routes.js";
+import { useAuth } from "../components/AuthContext.tsx";
 import "../styles/Navbar.css";
 import "../styles/index.css";
 
 function Navbar() {
     const [sidebar, setSidebar] = useState(true);
     const location = useLocation();
+    const { isAuthenticated } = useAuth();
+    const routesToDisplay = isAuthenticated ? protectedRoutes : publicRoutes;
+
     const showSidebar = () => { 
         setSidebar((prevSidebar) => !prevSidebar);
 
@@ -19,6 +22,7 @@ function Navbar() {
         content.classList.remove('page-content-extended') :
         content.classList.add('page-content-extended');
     };
+
     return (
         <>
             <IconContext.Provider value={{ color: "#fff"}}>
@@ -34,10 +38,10 @@ function Navbar() {
                         {/*
                     <Link to="#" className="menu-bars">
                         <AiIcons.AiOutlineClose />
-                    </Link>*/}
+                    </Link>*/}  
                     </li>
 
-                    {Routes.map((item, index) => {
+                    {routesToDisplay.map((item, index) => {
                         
                         const activeClass = location.pathname === item.path ? "active" : "";
 

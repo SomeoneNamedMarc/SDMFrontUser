@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import "../styles/index.css";
+import CreateUser from "../components/API/CreateUserAPI.tsx";
 
 function Register() {
     const [formValues, setFormValues] = useState({
@@ -36,7 +36,7 @@ function Register() {
           isValid = false;
         }
         if (!formValues.email.trim() || !emailPattern.test(formValues.email.trim())) {
-          newErrors.email = true;
+          newErrors.email = "Invalid email format";
           isValid = false;
         }
         if (!formValues.password.trim()) {
@@ -74,8 +74,28 @@ function Register() {
       const handleSubmit = () => {
         if (validateForm()) {
           //alert("Form submitted successfully!");
-        } else {
-          //alert("Please fix the errors in the form.");
+          CreateUser(formValues.username.trim(),
+                     formValues.password.trim(),
+                     formValues.email.trim(),
+                     formValues.company.trim(),
+                     formValues.firstName.trim(),
+                     formValues.lastName.trim()
+                    )
+                    .then(() => {
+                        // Reset the form or show success message
+                    })
+                    .catch(error => {
+                        console.error("Error: ", error.message);
+
+                        if (error.message.includes("username"))
+                        {
+                            setErrors(prevErrors => ({ ...prevErrors, username: "Username already exists" }));
+                        }
+                        if (error.message.includes("email"))
+                        {
+                            setErrors(prevErrors => ({ ...prevErrors, email: "Email already exists" }));
+                        }
+                    });
         }
       };
 
@@ -90,14 +110,14 @@ function Register() {
                 autoComplete="off">
                 <br/>
                 <div className="registration-fields">
-                    <TextField required id="input-username" placeholder="Username" label="Username"            error={errors.username}
+                    <TextField required id="input-username" placeholder="Username" label="Username" error={!!errors.username}
                     value={formValues.username}
                     onChange={handleInputChange("username")}
-                    helperText={errors.username ? "Username is required" : ""}/>
-                    <TextField required id="input-emails" placeholder="Email" label="Email"            error={errors.email}
+                    helperText={errors.username || ""}/>
+                    <TextField required id="input-emails" placeholder="Email" label="Email" error={!!errors.email}
                     value={formValues.email}
                     onChange={handleInputChange("email")}
-                    helperText={errors.email ? "Email is required" : ""}/>
+                    helperText={errors.email || ""}/>
                 </div>
                 <div className="registration-fields">
                     <TextField required id="input-password" label="Password" placeholder="Password" type="password" defaultValue=""

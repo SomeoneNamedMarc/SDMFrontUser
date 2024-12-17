@@ -61,3 +61,15 @@ code {
 .registration-fields {
   padding-bottom: 2%;
 }
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 10%;
+  padding-top: 5%;
+}
+.login-fields {
+  padding-bottom: 2%;
+}
+

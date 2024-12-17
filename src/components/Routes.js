@@ -1,20 +1,58 @@
 import React from 'react'
-import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import * as IoIcons from "react-icons/io";
-import Home from "../pages/Home";
+import Evaluation from "../pages/Evaluation";
 import Todo from "../pages/Todo";
 import About from "../pages/About";
 import Register from "../pages/Register";
+import Login from "../pages/Login"
+import Home from "../pages/Home"
 
-
-export const Routes = [
+export const publicRoutes = [
     {
         title: "Home",
         path: "/",
         icons: <AiIcons.AiFillHome />,
         cName: "nav-text",
         component:  <Home />,
+    },
+    {
+        title: "About us",
+        path: "/about",
+        icons: <AiIcons.AiOutlineInfoCircle  />,
+        cName: "nav-text",
+        component:  <About />,
+    },
+    {
+        title: "Register",
+        path: "/register",
+        icons: <AiIcons.AiOutlineInfoCircle  />,
+        cName: "nav-text",
+        component:  <Register />,
+    },
+    {
+        title: "Login",
+        path: "/login",
+        icons: <AiIcons.AiOutlineInfoCircle  />,
+        cName: "nav-text",
+        component:  <Login />,
+    }
+];
+
+
+export const protectedRoutes = [
+    {
+        title: "Home",
+        path: "/",
+        icons: <AiIcons.AiFillHome />,
+        cName: "nav-text",
+        component:  <Home />,
+    },
+    {
+        title: "Evaluation",
+        path: "/evaluation",
+        icons: <AiIcons.AiOutlineCheckSquare  />,
+        cName: "nav-text",
+        component:  <Evaluation />,
     },
     {
         title: "Todo",
@@ -30,13 +68,4 @@ export const Routes = [
         cName: "nav-text",
         component:  <About />,
     },
-    {
-        title: "Register",
-        path: "/register",
-        icons: <AiIcons.AiOutlineInfoCircle  />,
-        cName: "nav-text",
-        component:  <Register />,
-    }
 ];
-
-export default Routes;

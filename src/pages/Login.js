@@ -2,11 +2,15 @@ import React, {useState} from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import { useNavigate } from "react-router-dom";
 import "../styles/index.css";
-import CreateUser from "../components/API/CreateUser.tsx";
+import { useAuth } from "../components/AuthContext.tsx";
+import LoginAPI from "../components/API/LoginAPI.tsx";
 
 function Login() {
+    const { login } = useAuth();
+    const navigate = useNavigate();
+
     const [formValues, setFormValues] = useState({
         username: "",
         password: "",
@@ -47,16 +51,18 @@ function Login() {
 
       const handleSubmit = () => {
         if (validateForm()) {
-          Login(formValues.username.trim(),
+          LoginAPI(formValues.username.trim(),
                      formValues.password.trim(),
                     )
-                    .then(() => {
-                        // Reset the form or show success message
+                    .then(data => {
+                        // calls the Authentication, with the data and a token to "persist" the login
+                        login(data.user, data.token);
+                        navigate("/todo");
                     })
                     .catch(error => {
                         console.error("Error: ", error.message);
 
-                        if (error.message.includes("username"))
+                        if (error.message.includes("Incorrect"))
                         {
                             setErrors(prevErrors => ({ ...prevErrors, username: "Username or password is incorrect" }));
                             setErrors(prevErrors => ({ ...prevErrors, password: "Username or password is incorrect" }));
