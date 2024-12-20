@@ -22,6 +22,11 @@ const authReducer = (state, action) => {
                 user: null,
                 token: null,
             };
+        case "SET_USER":
+            return {
+                ...state,
+                user: action.payload.user,
+            };
         default:
             return state;
     }
@@ -31,6 +36,7 @@ const AuthContext = createContext({
     ...initialState,
     login: () => {},
     logout: () => {},
+    setUser: () => {},
 });
 
 export const AuthProvider = ({ children }) => {
@@ -38,16 +44,21 @@ export const AuthProvider = ({ children }) => {
 
     const login = (user, token) => {
         dispatch({ type: "LOGIN", payload: { user, token } });
-        localStorage.setItem("token", token); // Save token for persistence
+        localStorage.setItem("token", token);
     };
 
     const logout = () => {
         dispatch({ type: "LOGOUT" });
-        localStorage.removeItem("token"); // Clear token from localStorage
+        localStorage.removeItem("token");
     };
 
+    const setUser = (user) => {
+        dispatch({ type: "SET_USER", payload: { user } });
+    };
+
+    
     return (
-        <AuthContext.Provider value={{ ...state, login, logout }}>
+        <AuthContext.Provider value={{ ...state, login, logout, setUser }}>
             {children}
         </AuthContext.Provider>
     );

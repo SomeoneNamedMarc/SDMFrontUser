@@ -5,6 +5,7 @@ import {
   RouterProvider,
   Outlet,
 } from "react-router-dom";
+import Login from "./pages/Login.js";
 import Navbar from "./components/Navbar.js";
 import { protectedRoutes, publicRoutes } from "./components/Routes";
 import { AuthProvider } from "./components/AuthContext.tsx";
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
   {
     element: <AppLayout />,
     children: [
+      { path: "/", element: <Login /> },
       ...publicRoutes.map(route => ({
       path: route.path,
       element: route.component,

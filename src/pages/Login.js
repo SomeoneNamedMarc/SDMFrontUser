@@ -6,10 +6,12 @@ import { useNavigate } from "react-router-dom";
 import "../styles/index.css";
 import { useAuth } from "../components/AuthContext.tsx";
 import LoginAPI from "../components/API/LoginAPI.tsx";
+import Animations from "../components/Animations.tsx";
 
 function Login() {
     const { login } = useAuth();
     const navigate = useNavigate();
+    const [showAnimation, setShowAnimation] = useState(false);
 
     const [formValues, setFormValues] = useState({
         username: "",
@@ -57,8 +59,12 @@ function Login() {
                     .then(data => {
                         // calls the Authentication, with the data and a token to "persist" the login
                         login(data.user, data.token);
-                        navigate("/todo");
-                    })
+                        setShowAnimation(true);
+                  
+                          setTimeout(() => {
+                            navigate("/todo");
+                          }, 2000);
+                        })
                     .catch(error => {
                         console.error("Error: ", error.message);
 
@@ -87,6 +93,11 @@ function Login() {
                     onChange={handleInputChange("username")}
                     helperText={errors.username || ""}/>
                 </div>
+                {showAnimation && (
+                    <div className="popup-animation">
+                        <Animations animationName="Successful" />
+                    </div>
+                )}
                 <div className="login-fields">
                     <TextField id="input-password" label="Password" placeholder="Password" type="password" defaultValue=""
                     error={!!errors.password}

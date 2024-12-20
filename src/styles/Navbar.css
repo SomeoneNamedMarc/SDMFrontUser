@@ -76,6 +76,7 @@
   }
   .nav-text.active {
     background-color: #1a66bc;
+    font-weight: bold;
     color: #fff;
   }
   

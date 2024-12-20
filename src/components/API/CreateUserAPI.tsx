@@ -1,6 +1,6 @@
 
 
-function CreateUser(Username: string, Password: string, Email: string, CompanyName: string, FirstName: string, LastName: string ) {
+function CreateUserAPI(Username: string, Password: string, Email: string, CompanyName: string, FirstName: string, LastName: string ) {
     const newUser = {
         Username,
         Password,
@@ -38,4 +38,4 @@ function CreateUser(Username: string, Password: string, Email: string, CompanyNa
     });
 }
 
-export default CreateUser;
+export default CreateUserAPI;

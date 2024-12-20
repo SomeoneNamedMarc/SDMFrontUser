@@ -3,9 +3,17 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import "../styles/index.css";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../components/AuthContext.tsx";
+import LoginAPI from "../components/API/LoginAPI.tsx";
 import CreateUser from "../components/API/CreateUserAPI.tsx";
+import Animations from "../components/Animations.tsx";
 
 function Register() {
+    const [showAnimation, setShowAnimation] = useState(false);
+    const { login } = useAuth();
+    const navigate = useNavigate();
+
     const [formValues, setFormValues] = useState({
         username: "",
         email: "",
@@ -82,7 +90,27 @@ function Register() {
                      formValues.lastName.trim()
                     )
                     .then(() => {
-                        // Reset the form or show success message
+                        LoginAPI(formValues.username.trim(),
+                        formValues.password.trim(),
+                       )
+                       .then(data => {
+                           // calls the Authentication, with the data and a token to "persist" the login
+                           login(data.user, data.token);
+                           setShowAnimation(true);
+                  
+                           setTimeout(() => {
+                                navigate("/evaluation");
+                           }, 2000);
+                       })
+                       .catch(error => {
+                           console.error("Error: ", error.message);
+   
+                           if (error.message.includes("Incorrect"))
+                           {
+                               setErrors(prevErrors => ({ ...prevErrors, username: "Username or password is incorrect" }));
+                               setErrors(prevErrors => ({ ...prevErrors, password: "Username or password is incorrect" }));
+                           }
+                       });
                     })
                     .catch(error => {
                         console.error("Error: ", error.message);
@@ -119,6 +147,11 @@ function Register() {
                     onChange={handleInputChange("email")}
                     helperText={errors.email || ""}/>
                 </div>
+                {showAnimation && (
+                    <div className="popup-animation">
+                        <Animations animationName="Successful" />
+                    </div>
+                )}
                 <div className="registration-fields">
                     <TextField required id="input-password" label="Password" placeholder="Password" type="password" defaultValue=""
                     error={errors.password}

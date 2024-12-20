@@ -4,23 +4,25 @@ import Evaluation from "../pages/Evaluation";
 import Todo from "../pages/Todo";
 import About from "../pages/About";
 import Register from "../pages/Register";
-import Login from "../pages/Login"
-import Home from "../pages/Home"
+import Login from "../pages/Login";
+import Home from "../pages/Home";
+import Method from "../pages/Method";
+import Logout from "../pages/Logout";
 
-export const publicRoutes = [
+export const publicRoutes = [/*
     {
         title: "Home",
         path: "/",
         icons: <AiIcons.AiFillHome />,
         cName: "nav-text",
         component:  <Home />,
-    },
+    },*/
     {
-        title: "About us",
-        path: "/about",
+        title: "Login",
+        path: "/login",
         icons: <AiIcons.AiOutlineInfoCircle  />,
         cName: "nav-text",
-        component:  <About />,
+        component:  <Login />,
     },
     {
         title: "Register",
@@ -30,29 +32,36 @@ export const publicRoutes = [
         component:  <Register />,
     },
     {
-        title: "Login",
-        path: "/login",
+        title: "About us",
+        path: "/about",
         icons: <AiIcons.AiOutlineInfoCircle  />,
         cName: "nav-text",
-        component:  <Login />,
-    }
+        component:  <About />,
+    },
 ];
 
 
-export const protectedRoutes = [
+export const protectedRoutes = [/*
     {
         title: "Home",
         path: "/",
         icons: <AiIcons.AiFillHome />,
         cName: "nav-text",
         component:  <Home />,
-    },
+    },*/
     {
         title: "Evaluation",
         path: "/evaluation",
         icons: <AiIcons.AiOutlineCheckSquare  />,
         cName: "nav-text",
         component:  <Evaluation />,
+    },
+    {
+        title: "Method",
+        path: "/method",
+        icons: <AiIcons.AiOutlineCheckSquare  />,
+        cName: "nav-text",
+        component:  <Method />,
     },
     {
         title: "Todo",
@@ -67,5 +76,12 @@ export const protectedRoutes = [
         icons: <AiIcons.AiOutlineInfoCircle  />,
         cName: "nav-text",
         component:  <About />,
+    },
+    {
+    title: "Logout",
+    path: "/logout",
+    icons: <AiIcons.AiOutlineInfoCircle  />,
+    cName: "nav-text",
+    component:  <Logout />,
     },
 ];

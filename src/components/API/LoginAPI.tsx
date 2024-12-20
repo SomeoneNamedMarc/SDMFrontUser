@@ -1,6 +1,6 @@
 
 
-function Login(Username: string, Password: string ) {
+function LoginAPI(Username: string, Password: string ) {
     const requestInfo = {
         Username,
         Password,
@@ -34,4 +34,4 @@ function Login(Username: string, Password: string ) {
     });
 }
 
-export default Login;
+export default LoginAPI;

@@ -2,8 +2,9 @@ import React, {useState} from "react";
 import Chart from "../components/RadarChart.tsx";
 import Slider from "../components/Slider.tsx";
 import "../styles/index.css";
+import CalculateMethods from "../components/CalculateMethods.js";
 
-function Home() {
+function Evaluation() { 
     const [sliderValues, setSliderValues] = useState({
         slider1: 1,
         slider2: 1,
@@ -25,14 +26,14 @@ function Home() {
         datasets: [
           {
             label: "Profile Area",
-            data: [sliderValues.slider2-(sliderValues.slider1-1), sliderValues.slider3, sliderValues.slider4, sliderValues.slider5, sliderValues.slider6],
+            data: [(sliderValues.slider2+sliderValues.slider1)/2, sliderValues.slider3, sliderValues.slider4, sliderValues.slider5, sliderValues.slider6],
             backgroundColor: "rgba(34, 202, 236, 0.2)",
             borderColor: "rgba(34, 202, 236, 1)",
             borderWidth: 3,
           },
         ],
       };
-    
+
       const options = {
         responsive: true,
         plugins: {
@@ -75,8 +76,9 @@ function Home() {
       };
 
     return (
+      <div>
         <div className="evaluation">
-            <h1>Evaluation</h1>
+          <div className="eval-context">
             <ul className="ul-no-styletype">
                 <li>
                 <label htmlFor="slider1" style={{ display: "block", marginBottom: "3px", fontWeight:"bold", fontSize:"18px"}}>
@@ -160,15 +162,30 @@ function Home() {
                         {value: 5, label: "Many Lives"},
                     ]} 
                     step="1" 
-                    onChange={handleSliderChange("slider6")}/>
+                    onChange={handleSliderChange("slider6")}
+                    sx={{
+                      '& .MuiSlider-markLabel': {
+                        fontSize: '12px',
+                      },
+                    }}/>
                 </li>
             </ul>
             <div className="chart-container">
                 <Chart data={data} options={options} />
             </div>
+          </div>
+          </div>
+          <div>
+                <CalculateMethods 
+                    personnel={sliderValues.slider1} 
+                    culture={sliderValues.slider4} 
+                    criticality={sliderValues.slider6} 
+                    size={sliderValues.slider5} 
+                    dynamism={sliderValues.slider3} 
+                />
+            </div>
         </div>
-
     )
 }
 
-export default Home;
+export default Evaluation;

@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import MUISlider from '@mui/material/Slider';
 
 
-const Slider = ({sliderValue, min, max, step, marks, onChange }) => {
+const Slider = ({sliderValue, min, max, step, marks, onChange, sx }) => {
     return (
-      <Box sx={{ width: "50%" }}>
+      <Box>
         <MUISlider           
           value={sliderValue}
           min={min}
@@ -14,6 +14,12 @@ const Slider = ({sliderValue, min, max, step, marks, onChange }) => {
           onChange={onChange}
           //valueLabelDisplay="auto"
           marks={marks}
+          sx={{
+            '& .MuiSlider-markLabel': {
+              fontSize: '14px',
+            },
+            ...sx,
+          }}
         />
       </Box>
     );
